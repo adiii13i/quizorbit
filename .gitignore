@@ -1,0 +1,17 @@
+# Frontend
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+
+# Backend
+backend/target/
+backend/src/main/resources/application.yaml
+*.class
+
+# Secrets
+*.env
+quizorbit-secrets.txt
+
+# System
+.DS_Store
+Thumbs.db
