@@ -57,132 +57,172 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 w-full max-w-md p-8">
+    <div className="min-h-screen bg-neutral flex items-center
+                    justify-center px-4">
+      <div className="w-full max-w-md">
 
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Create your account
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-primary">
+            QuizOrbit
           </h1>
-          <p className="text-gray-500 mt-1 text-sm">
-            Join QuizOrbit as a tutor or student
+          <p className="text-secondary text-sm mt-1">
+            Learn. Teach. Grow.
           </p>
         </div>
 
-        {/* Error Message */}
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-            {error}
-          </div>
-        )}
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-sm border
+                        border-gray-100 p-8">
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+          <h2 className="text-xl font-semibold text-primary mb-1">
+            Create your account
+          </h2>
+          <p className="text-secondary text-sm mb-6">
+            Join QuizOrbit as a tutor or student
+          </p>
 
-          {/* Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="John Doe"
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="john@example.com"
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-            />
-          </div>
-
-          {/* Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={formData.value}
-              onChange={handleChange}
-              required
-              placeholder="Min 8 characters"
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-            />
-          </div>
-
-          {/* Role Selection */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              I am a...
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() =>
-                  setFormData({ ...formData, role: "STUDENT" })
-                }
-                className={`py-2.5 px-4 rounded-lg border text-sm font-medium transition-all ${
-                  formData.role === "STUDENT"
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"
-                }`}
-              >
-                Student
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setFormData({ ...formData, role: "TUTOR" })
-                }
-                className={`py-2.5 px-4 rounded-lg border text-sm font-medium transition-all ${
-                  formData.role === "TUTOR"
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"
-                }`}
-              >
-                Tutor
-              </button>
+          {/* Error */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border
+                            border-red-200 rounded-lg
+                            text-red-600 text-sm">
+              {error}
             </div>
-          </div>
+          )}
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-gray-900 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-          >
-            {loading ? "Creating account..." : "Create Account"}
-          </button>
-        </form>
+          <form onSubmit={handleSubmit} className="space-y-4">
 
-        {/* Login Link */}
-        <p className="text-center text-sm text-gray-500 mt-6">
-          Already have an account?{" "}
-          <Link
-            href="/login"
-            className="text-gray-900 font-medium hover:underline"
-          >
-            Sign in
-          </Link>
-        </p>
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-medium
+                                text-primary mb-1">
+                Full Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="John Doe"
+                className="w-full px-4 py-2.5 border border-gray-200
+                           rounded-lg text-sm text-primary
+                           placeholder-gray-400
+                           focus:outline-none focus:ring-2
+                           focus:ring-tertiary focus:border-transparent
+                           transition-all"
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium
+                                text-primary mb-1">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="john@example.com"
+                className="w-full px-4 py-2.5 border border-gray-200
+                           rounded-lg text-sm text-primary
+                           placeholder-gray-400
+                           focus:outline-none focus:ring-2
+                           focus:ring-tertiary focus:border-transparent
+                           transition-all"
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium
+                                text-primary mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="Min 8 characters"
+                className="w-full px-4 py-2.5 border border-gray-200
+                           rounded-lg text-sm text-primary
+                           placeholder-gray-400
+                           focus:outline-none focus:ring-2
+                           focus:ring-tertiary focus:border-transparent
+                           transition-all"
+              />
+            </div>
+
+            {/* Role Toggle */}
+            <div>
+              <label className="block text-sm font-medium
+                                text-primary mb-2">
+                I am a...
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({ ...formData, role: "STUDENT" })
+                  }
+                  className={`py-2.5 px-4 rounded-lg border text-sm
+                              font-medium transition-all ${
+                    formData.role === "STUDENT"
+                      ? "bg-tertiary text-white border-tertiary"
+                      : "bg-white text-secondary border-gray-200 hover:border-tertiary"
+                  }`}
+                >
+                  🎓 Student
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({ ...formData, role: "TUTOR" })
+                  }
+                  className={`py-2.5 px-4 rounded-lg border text-sm
+                              font-medium transition-all ${
+                    formData.role === "TUTOR"
+                      ? "bg-tertiary text-white border-tertiary"
+                      : "bg-white text-secondary border-gray-200 hover:border-tertiary"
+                  }`}
+                >
+                  👨‍🏫 Tutor
+                </button>
+              </div>
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-primary text-white py-2.5
+                         rounded-lg text-sm font-medium
+                         hover:bg-tertiary transition-colors
+                         disabled:opacity-50 disabled:cursor-not-allowed
+                         mt-2"
+            >
+              {loading ? "Creating account..." : "Create Account"}
+            </button>
+
+          </form>
+
+          {/* Login Link */}
+          <p className="text-center text-sm text-secondary mt-6">
+            Already have an account?{" "}
+            <Link
+              href="/login"
+              className="text-tertiary font-medium hover:underline"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
