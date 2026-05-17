@@ -37,6 +37,11 @@ public class Quiz {
     @JoinColumn(name = "tutor_id", nullable = false)
     private User tutor;
 
+    @Column(name = "max_participants")
+    private Integer maxParticipants = 25;
+
+    @Column(name = "participant_count")
+    private Integer participantCount = 0;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<Question> questions;

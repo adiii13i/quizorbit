@@ -24,53 +24,53 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final UserRepository userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Get the Authorization header
         final String authHeader = request.getHeader("Authorization");
 
-        // If no token, skip this filter
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // Extract token (remove "Bearer " prefix)
-        final String token = authHeader.substring(7);
-        final String email = jwtUtil.extractEmail(token);
-        final String role = jwtUtil.extractRole(token);
+        try {
+            final String token = authHeader.substring(7);
+            final String email = jwtUtil.extractEmail(token);
+            final String role = jwtUtil.extractRole(token);
 
-        // If email found and user not already authenticated
-        if (email != null &&
-            SecurityContextHolder.getContext()
-                                 .getAuthentication() == null) {
+            if (email != null &&
+                SecurityContextHolder.getContext()
+                                     .getAuthentication() == null) {
 
-            // Check user exists in database
-            boolean userExists = userRepository
-                                    .existsByEmail(email);
+                boolean userExists =
+                        userRepository.existsByEmail(email);
 
-            if (userExists && jwtUtil.isTokenValid(token, email)) {
-                // Create authentication object
-                UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(
-                        email,
-                        null,
-                        List.of(new SimpleGrantedAuthority(
-                                        "ROLE_" + role))
+                if (userExists &&
+                        jwtUtil.isTokenValid(token, email)) {
+
+                    UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(
+                            email,
+                            null,
+                            List.of(new SimpleGrantedAuthority(
+                                    "ROLE_" + role))
+                        );
+
+                    authToken.setDetails(
+                        new WebAuthenticationDetailsSource()
+                                .buildDetails(request)
                     );
 
-                authToken.setDetails(
-                    new WebAuthenticationDetailsSource()
-                            .buildDetails(request)
-                );
-
-                // Set authentication in Spring context
-                SecurityContextHolder.getContext()
-                                     .setAuthentication(authToken);
+                    SecurityContextHolder.getContext()
+                                         .setAuthentication(authToken);
+                }
             }
+        } catch (Exception e) {
+            // Invalid token — continue without auth
         }
 
         filterChain.doFilter(request, response);

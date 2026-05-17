@@ -783,30 +783,7 @@ export default function CreateQuizPage() {
                 </div>
               </div>
 
-              {/* AI Info Box */}
-              <div
-                className="flex gap-3 p-4 rounded-lg"
-                style={{ backgroundColor: "#e8f0fe" }}
-              >
-                <span
-                  className="material-symbols-outlined flex-shrink-0"
-                  style={{ fontSize: "20px", color: "#1a56db" }}
-                >
-                  info
-                </span>
-                <div>
-                  <p
-                    className="text-sm font-medium"
-                    style={{ color: "#1a56db" }}
-                  >
-                    Dual-Agent AI Validation
-                  </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#3b5fc0" }}>
-                    A second AI agent verifies all generated questions for
-                    accuracy before showing them to you.
-                  </p>
-                </div>
-              </div>
+              
 
               {/* Generate Button */}
               <button

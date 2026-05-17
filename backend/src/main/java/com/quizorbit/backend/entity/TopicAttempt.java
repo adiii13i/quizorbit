@@ -40,6 +40,9 @@ public class TopicAttempt {
     @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
 
+    @Column(name = "time_taken")
+    private Integer timeTaken;
+
     @PrePersist
     public void prePersist() {
         this.attemptedAt = LocalDateTime.now();
